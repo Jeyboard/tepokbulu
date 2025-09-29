@@ -10,11 +10,11 @@
             margin: 0;
             padding: 20px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 10vh;
+            min-height: 100vh;
         }
         
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             background: white;
             border-radius: 15px;
@@ -65,17 +65,10 @@
             border-bottom-color: #1e3c72;
         }
         
-        .tab.mens {
-            color: #0984e3;
-        }
-        
-        .tab.womens {
-            color: #e84393;
-        }
-        
-        .tab.mixed {
-            color: #00b894;
-        }
+        .tab.mens { color: #0984e3; }
+        .tab.womens { color: #e84393; }
+        .tab.mixed { color: #00b894; }
+        .tab.schedule { color: #ff6b35; }
         
         .tab:hover {
             background: #ffffff;
@@ -86,7 +79,6 @@
             display: none;
             padding: 40px;
             overflow-x: auto;
-            overflow-y: auto;
         }
         
         .category-content.active {
@@ -95,7 +87,7 @@
         
         .category-header {
             text-align: center;
-            margin-bottom: 3px;
+            margin-bottom: 30px;
         }
         
         .category-title {
@@ -107,12 +99,14 @@
         .mens .category-title { color: #0984e3; }
         .womens .category-title { color: #e84393; }
         .mixed .category-title { color: #00b894; }
+        .schedule .category-title { color: #ff6b35; }
         
         .bracket-container {
             display: flex;
             justify-content: space-around;
-            min-width: 1000px;
-            gap: 30px;
+            min-width: 1200px;
+            gap: 40px;
+            position: relative;
         }
         
         .round {
@@ -120,27 +114,35 @@
             flex-direction: column;
             justify-content: space-around;
             min-height: 600px;
+            position: relative;
         }
         
         .round h3 {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             color: #1e3c72;
             font-size: 1.4em;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 10px 0;
+            z-index: 3;
         }
         
         .match {
             background: #f8f9fa;
             border: 2px solid #e9ecef;
             border-radius: 10px;
-            margin: 10px 0;
+            margin: 15px 0;
             padding: 15px;
-            width: 200px;
+            width: 220px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
         }
         
         .match:hover {
@@ -150,11 +152,12 @@
         
         .team {
             padding: 8px 12px;
-            margin: 1px 0;
+            margin: 2px 0;
             border-radius: 6px;
             font-weight: 500;
             transition: background-color 0.3s ease;
-            font-size: 0.9em;
+            font-size: 0.85em;
+            line-height: 1.2;
         }
         
         .mens .team-1 {
@@ -219,6 +222,114 @@
             border-radius: 15px;
             box-shadow: 0 5px 25px rgba(253, 203, 110, 0.4);
         }
+
+        /* Garis penghubung */
+        .bracket-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .bracket-line {
+            stroke: #1e3c72;
+            stroke-width: 2;
+            fill: none;
+        }
+        
+        .bracket-line.mens {
+            stroke: #0984e3;
+        }
+        
+        .bracket-line.womens {
+            stroke: #e84393;
+        }
+        
+        .bracket-line.mixed {
+            stroke: #00b894;
+        }
+        
+        /* Positioning untuk match boxes agar konsisten dengan SVG */
+        .bracket-container {
+            display: flex;
+            justify-content: space-around;
+            min-width: 1200px;
+            gap: 40px;
+            position: relative;
+        }
+        
+        .round {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            min-height: 600px;
+            position: relative;
+        }
+        
+        .round .match {
+            margin: 15px 0;
+            position: relative;
+        }
+        
+        /* Schedule Styles */
+        .schedule-container {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px 0;
+        }
+        
+        .schedule-day {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .schedule-date {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .schedule-match {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            margin: 8px 0;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #ff6b35;
+        }
+        
+        .schedule-time {
+            font-weight: bold;
+            color: #ff6b35;
+            min-width: 80px;
+        }
+        
+        .schedule-teams {
+            flex: 1;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .schedule-court {
+            background: #1e3c72;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
         
         .legend {
             background: #f8f9fa;
@@ -243,21 +354,45 @@
         
         @media (max-width: 768px) {
             .category-content {
-                padding: 20px;
+                padding: 20px 10px;
             }
             
             .bracket-container {
-                min-width: 800px;
+                min-width: 900px;
+                gap: 60px;
+                padding: 20px 10px;
             }
             
             .match {
-                width: 150px;
-                padding: 10px;
+                width: 200px;
+                padding: 12px;
+                font-size: 0.8em;
+            }
+            
+            .round {
+                width: 200px;
+            }
+            
+            .round h3 {
+                font-size: 1.2em;
+                margin-bottom: 30px;
             }
             
             .tab {
                 font-size: 0.9em;
-                padding: 15px 10px;
+                padding: 15px 8px;
+            }
+            
+            .schedule-match {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+            
+            .final-winner {
+                font-size: 1em;
+                padding: 20px 15px;
+                min-height: 60px;
             }
         }
     </style>
@@ -279,6 +414,9 @@
             <div class="tab mixed" onclick="showCategory('mixed')">
                 👫 GANDA CAMPURAN
             </div>
+            <div class="tab schedule" onclick="showCategory('schedule')">
+                📅 JADWAL
+            </div>
         </div>
         
         <!-- KATEGORI GANDA PUTRA -->
@@ -289,80 +427,84 @@
             </div>
             
             <div class="bracket-container">
+                <svg class="bracket-svg" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Garis akan dibuat dinamis dengan JavaScript -->
+                </svg>
+                
                 <!-- Babak Pertama -->
-                <div class="round">
+                <div class="round" data-round="1">
                     <h3>Babak Penyisihan</h3>
                     
-                    <div class="match">
+                    <div class="match" data-match="0">
                         <div class="team team-1">GPA-A (WANDANIEL & NAUFAL)</div>
                         <div class="vs">vs</div>
                         <div class="team team-2">GPA-B (MAMAN NUR BAGYO & JAENUDIN)</div>
                     </div>
                     
-                    <div class="match">
+                    <div class="match" data-match="1">
                         <div class="team team-1">GPA-C (RAMA & DEDI)</div>
                         <div class="vs">vs</div>
                         <div class="team team-2">GPA-D (JUAN MARULI & GHUVRON HUSNI)</div>
                     </div>
                     
-                    <div class="match">
+                    <div class="match" data-match="2">
                         <div class="team team-1">GPA-E (YANUAR RAMADANI & DENI WAHYUDI)</div>
                         <div class="vs">vs</div>
                         <div class="team team-2">GPA-F (ARIEF RACHMADY & RICKY EKO WAHYUDI)</div>
                     </div>
                     
-                    <div class="match">
+                    <div class="match" data-match="3">
                         <div class="team team-1">GPA-G (DELLY RIZKI SAVIOLLA & SIDIK ANUGRAH)</div>
                         <div class="vs">vs</div>
                         <div class="team team-2">GPA-H (MOCHAMAD FAISAL & AHMAD RISKY)</div>
                     </div>
                     
-                    <div class="match">
+                    <div class="match" data-match="4">
                         <div class="team team-1">GPA-I (GUNTUR MASPUTRA JR & RYUKAZU ANDARA S)</div>
                         <div class="vs">vs</div>
                         <div class="team team-2">GPA-J (SLAMET KURNIAWAN & HARYO PAMINTO ADJI)</div>
                     </div>
                     
-                    <div class="match">
+                    <div class="match" data-match="5">
                         <div class="team team-1">GPA-K (JAKA BRAJADENTA & RONI SUMANTRI)</div>
                         <div class="vs">vs</div>
-                        <div class="team team-2">GPA-L (FAJAR NUGRAHA & RIZKY DHERMAWAN )</div>
+                        <div class="team team-2">GPA-L (FAJAR NUGRAHA & RIZKY DHERMAWAN)</div>
                     </div>
                     
-                    <div class="match">
+                    <div class="match" data-match="6">
                         <div class="team team-1">GPA-M (KIKI ADITIYA & AUDRY PUTRA)</div>
                         <div class="vs">vs</div>
                         <div class="team team-2">GPA-N (FEBIUTOYO & REZKI DWI)</div>
                     </div>
                     
-                    <div class="match">
+                    <div class="match" data-match="7">
                         <div class="team bye">GPA-O (MOCHAMAD IQSAL ALFIANSYAH & LUTHFI EKI REZA)</div>
                     </div>
                 </div>
                 
                 <!-- Babak Kedua -->
-                <div class="round">
+                <div class="round" data-round="2">
                     <h3>Babak Kedua</h3>
                     
-                    <div class="match">
+                    <div class="match" data-match="0">
                         <div class="team winner-slot">WANDANIEL & NAUFAL</div>
                         <div class="vs">vs</div>
                         <div class="team winner-slot">JUAN MARULI & GHUVRON HUSNI</div>
                     </div>
                     
-                    <div class="match">
+                    <div class="match" data-match="1">
                         <div class="team winner-slot">Pemenang GPA-E vs GPA-F</div>
                         <div class="vs">vs</div>
                         <div class="team winner-slot">Pemenang GPA-G vs GPA-H</div>
                     </div>
                     
-                    <div class="match">
+                    <div class="match" data-match="2">
                         <div class="team winner-slot">Pemenang GPA-I vs GPA-J</div>
                         <div class="vs">vs</div>
                         <div class="team winner-slot">Pemenang GPA-K vs GPA-L</div>
                     </div>
                     
-                    <div class="match">
+                    <div class="match" data-match="3">
                         <div class="team winner-slot">FEBIUTOYO & REZKI DWI</div>
                         <div class="vs">vs</div>
                         <div class="team winner-slot">MOCHAMAD IQSAL ALFIANSYAH & LUTHFI EKI REZA</div>
@@ -370,27 +512,27 @@
                 </div>
                 
                 <!-- Perempat Final -->
-                <div class="round">
-                    <h3>Perempat Final</h3>
+                <div class="round" data-round="3">
+                    <h3>Semifinal</h3>
                     
-                    <div class="match">
-                        <div class="team winner-slot">Pemenang 1</div>
+                    <div class="match" data-match="0">
+                        <div class="team winner-slot">Pemenang Babak 2 - Match 1</div>
                         <div class="vs">vs</div>
-                        <div class="team winner-slot">Pemenang 2</div>
+                        <div class="team winner-slot">Pemenang Babak 2 - Match 2</div>
                     </div>
                     
-                    <div class="match">
-                        <div class="team winner-slot">Pemenang 3</div>
+                    <div class="match" data-match="1">
+                        <div class="team winner-slot">Pemenang Babak 2 - Match 3</div>
                         <div class="vs">vs</div>
-                        <div class="team winner-slot">Pemenang 4</div>
+                        <div class="team winner-slot">Pemenang Babak 2 - Match 4</div>
                     </div>
                 </div>
                 
                 <!-- Semifinal -->
-                <div class="round">
-                    <h3>Semifinal</h3>
+                <div class="round" data-round="4">
+                    <h3>Final</h3>
                     
-                    <div class="match">
+                    <div class="match" data-match="0">
                         <div class="team winner-slot">Semifinalis 1</div>
                         <div class="vs">vs</div>
                         <div class="team winner-slot">Semifinalis 2</div>
@@ -398,10 +540,9 @@
                 </div>
                 
                 <!-- Final -->
-                <div class="round">
-                    <h3>Final</h3>
+                <div class="round" data-round="5">
                     
-                    <div class="match final-winner">
+                    <div class="match final-winner" data-match="0">
                         🏆 JUARA<br>GANDA PUTRA
                     </div>
                 </div>
@@ -416,84 +557,38 @@
             </div>
             
             <div class="bracket-container">
-                <!-- Babak Pertama
-                <div class="round">
-                    <h3>Babak Pertama</h3>
-                    
-                    <div class="match">
-                        <div class="team team-1">GPI-A (Player1/Player2)</div>
-                        <div class="vs">vs</div>
-                        <div class="team team-2">GPI-B (Player3/Player4)</div>
-                    </div>
-                    
-                    <div class="match">
-                        <div class="team team-1">GPI-C (Player5/Player6)</div>
-                        <div class="vs">vs</div>
-                        <div class="team team-2">GPI-D (Player7/Player8)</div>
-                    </div>
-                    
-                    <div class="match">
-                        <div class="team team-1">GPI-E (Player9/Player10)</div>
-                        <div class="vs">vs</div>
-                        <div class="team team-2">GPI-F (Player11/Player12)</div>
-                    </div>
-                    
-                    <div class="match">
-                        <div class="team team-1">GPI-G (Player13/Player14)</div>
-                        <div class="vs">vs</div>
-                        <div class="team team-2">GPI-H (Player15/Player16)</div>
-                    </div>
-                    
-                    <div class="match">
-                        <div class="team team-1">GPI-I (Player17/Player18)</div>
-                        <div class="vs">vs</div>
-                        <div class="team team-2">GPI-J (Player19/Player20)</div>
-                    </div>
-                    
-                    <div class="match">
-                        <div class="team team-1">GPI-K (Player21/Player22)</div>
-                        <div class="vs">vs</div>
-                        <div class="team team-2">GPI-L (Player23/Player24)</div>
-                    </div>
-                    
-                    <div class="match">
-                        <div class="team team-1">GPI-M (Player25/Player26)</div>
-                        <div class="vs">vs</div>
-                        <div class="team team-2">GPI-N (Player27/Player28)</div>
-                    </div>
-                    
-                    <div class="match">
-                        <div class="team bye">GPI-O (BYE)</div>
-                    </div>
-                </div> -->
+                <svg class="bracket-svg" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Garis akan dibuat dinamis dengan JavaScript -->
+                </svg>
                 
-                <!-- Babak Kedua -->
-                <div class="round">
+                <!-- Babak Penyisihan -->
+                <div class="round" data-round="1">
                     <h3>Babak Penyisihan</h3>
                     
                     <div class="match">
-                        <div class="team winner-slot">GPI-A (NADHIRA FAUZIA & FEBRINA ANDAYANI)</div>
+                        <div class="team team-1">GPI-A (NADHIRA FAUZIA & FEBRINA ANDAYANI)</div>
                         <div class="vs">vs</div>
-                        <div class="team winner-slot">GPI-B (CLARA & TETRA)</div>
+                        <div class="team team-2">GPI-B (CLARA & TETRA)</div>
                     </div>
                     
                     <div class="match">
-                        <div class="team winner-slot">GPI-C (MAYASYARI & VERA SUCIYATI)</div>
+                        <div class="team team-1">GPI-C (MAYASYARI & VERA SUCIYATI)</div>
                         <div class="vs">vs</div>
-                        <div class="team winner-slot">GPI-D (NADIRA & ERIKA)</div>
+                        <div class="team team-2">GPI-D (NADIRA & ERIKA)</div>
                     </div>
                     
                     <div class="match">
-                        <div class="team winner-slot">GPI-E (INDRA NURANI & RAFISYA INDI RACHMAWATI)</div>
+                        <div class="team team-1">GPI-E (INDRA NURANI & RAFISYA INDI RACHMAWATI)</div>
                         <div class="vs">vs</div>
-                        <div class="team winner-slot">GPI-F (ANITA ZULIANI & FIRDA NUR ANNISA)</div>
+                        <div class="team team-2">GPI-F (ANITA ZULIANI & FIRDA NUR ANNISA)</div>
                     </div>
                     
                     <div class="match">
-                        <div class="team winner-slot">GPI-G (GRACE MALAU & VIONTINA DEA)</div>
+                        <div class="team team-1">GPI-G (GRACE MALAU & VIONTINA DEA)</div>
                         <div class="vs">vs</div>
-                        <div class="team winner-slot">GPI-H (REVITA ARYANI  & PUTRI WAHYURIANI )</div>
+                        <div class="team team-2">GPI-H (REVITA ARYANI & PUTRI WAHYURIANI)</div>
                     </div>
+                    
                     <div class="match">
                         <div class="team bye">GPI-I (ANNISA APRILIA PUSPARANI & KHARISMA APRILIA LESTARI)</div>
                     </div>
@@ -501,24 +596,30 @@
                 
                 <!-- Perempat Final -->
                 <div class="round">
-                    <h3>Perempat Final</h3>
-                    
+                    <h3>Semifinal</h3>		
+					
                     <div class="match">
                         <div class="team winner-slot">NADHIRA FAUZIA & FEBRINA ANDAYANI</div>
                         <div class="vs">vs</div>
-                        <div class="team winner-slot">Pemenang 2</div>
+                        <div class="team winner-slot">Pemenang GPI-C vs GPI-D</div>
                     </div>
                     
                     <div class="match">
                         <div class="team winner-slot">ANITA ZULIANI & FIRDA NUR ANNISA</div>
                         <div class="vs">vs</div>
-                        <div class="team winner-slot">Pemenang 4</div>
+                        <div class="team winner-slot">Pemenang M+</div>
+                    </div>
+                    
+                    <div class="match">
+                        <div class="team winner-slot">M+ (ANNISA APRILIA PUSPARANI & KHARISMA APRILIA LESTARI)</div>
+                        <div class="vs">vs</div>
+                        <div class="team winner-slot">M+ (Pemenang GPI-G vs GPI-H)</div>
                     </div>
                 </div>
                 
                 <!-- Semifinal -->
                 <div class="round">
-                    <h3>Semifinal</h3>
+                    <h3>Final</h3>
                     
                     <div class="match">
                         <div class="team winner-slot">Semifinalis 1</div>
@@ -529,7 +630,6 @@
                 
                 <!-- Final -->
                 <div class="round">
-                    <h3>Final</h3>
                     
                     <div class="match final-winner">
                         🏆 JUARA<br>GANDA PUTRI
@@ -546,14 +646,18 @@
             </div>
             
             <div class="bracket-container">
+                <svg class="bracket-svg" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Garis akan dibuat dinamis dengan JavaScript -->
+                </svg>
+                
                 <!-- Babak Pertama -->
-                <div class="round">
+                <div class="round" data-round="1">
                     <h3>Babak Penyisihan</h3>
                     
                     <div class="match">
                         <div class="team team-1">GCA-A (WANANIEL & GRACE)</div>
                         <div class="vs">vs</div>
-                        <div class="team team-2">GCA-B (MUHAMMAD FIRDAUS & FIRDA NUR ANISA FUJIATI)</div>
+                        <div class="team team-2">GCA-B (MUHAMMAD FIRDAUS & FIRDA NUR ANISA)</div>
                     </div>
                     
                     <div class="match">
@@ -571,13 +675,13 @@
                     <div class="match">
                         <div class="team team-1">GCA-G (NADHIRA FAUZIA HAUNAFASYA & JAKA BRAJADENTA)</div>
                         <div class="vs">vs</div>
-                        <div class="team team-2">GCA-H (ARIEF DHARMAWAN  & INDRA NURANI)</div>
+                        <div class="team team-2">GCA-H (ARIEF DHARMAWAN & INDRA NURANI)</div>
                     </div>
                     
                     <div class="match">
                         <div class="team team-1">GCA-I (FEBRINA ANDAYANI & MUHAMMAD AFIF ABDILLAH)</div>
                         <div class="vs">vs</div>
-                        <div class="team team-2">GCA-J (HISTORIDA BAGASKARA & KARTIKA AMARETA )</div>
+                        <div class="team team-2">GCA-J (HISTORIDA BAGASKARA & KARTIKA AMARETA)</div>
                     </div>
                     
                     <div class="match">
@@ -622,30 +726,30 @@
                     <div class="match">
                         <div class="team winner-slot">Pemenang GCA-M vs GCA-N</div>
                         <div class="vs">vs</div>
-                        <div class="team winner-slot">GCA-O</div>
+                        <div class="team winner-slot">REIGI AHMAD FADILAH & FAUZIAH NUR AZIZAH</div>
                     </div>
                 </div>
                 
                 <!-- Perempat Final -->
                 <div class="round">
-                    <h3>Perempat Final</h3>
+                    <h3>Semifinal</h3>
                     
                     <div class="match">
-                        <div class="team winner-slot">Pemenang 1</div>
+                        <div class="team winner-slot">Pemenang Babak 2 - Match 1</div>
                         <div class="vs">vs</div>
-                        <div class="team winner-slot">Pemenang 2</div>
+                        <div class="team winner-slot">Pemenang Babak 2 - Match 2</div>
                     </div>
                     
                     <div class="match">
-                        <div class="team winner-slot">Pemenang 3</div>
+                        <div class="team winner-slot">Pemenang Babak 2 - Match 3</div>
                         <div class="vs">vs</div>
-                        <div class="team winner-slot">Pemenang 4</div>
+                        <div class="team winner-slot">Pemenang Babak 2 - Match 4</div>
                     </div>
                 </div>
                 
                 <!-- Semifinal -->
                 <div class="round">
-                    <h3>Semifinal</h3>
+                    <h3>Final</h3>
                     
                     <div class="match">
                         <div class="team winner-slot">Semifinalis 1</div>
@@ -656,11 +760,295 @@
                 
                 <!-- Final -->
                 <div class="round">
-                    <h3>Final</h3>
                     
                     <div class="match final-winner">
                         🏆 JUARA<br>GANDA CAMPURAN
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- JADWAL PERTANDINGAN -->
+        <div id="schedule" class="category-content schedule">
+            <div class="category-header">
+                <div class="category-title">📅 JADWAL PERTANDINGAN</div>
+                <p>Jadwal Lengkap Turnamen Tepok Bulu</p>
+            </div>
+            
+            <div class="schedule-container">
+                <div class="schedule-day">
+                    <div class="schedule-date">🗓️ Kamis, 25 September 2025 - Babak Penyisihan</div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:00</span>
+                        <span class="schedule-teams"> (WANDANIEL & NAUFAL) VS (MAMAN NUR BAGYO & JAENUDIN)</span>
+                        <span class="schedule-court">GANDA PUTRA</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:15</span>
+                        <span class="schedule-teams">(KIKI ADITIYA & AUDRY PUTRA) VS (FEBIUTOYO & REZKI DWI)</span>
+                        <span class="schedule-court">GANDA PUTRA</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:30</span>
+                        <span class="schedule-teams">(RAMA & DEDI) VS (JUAN MARULI & GHUVRON HUSNI)</span>
+                        <span class="schedule-court">GANDA PUTRA</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:45</span>
+                        <span class="schedule-teams">(NADHIRA FAUZIA & FEBRINA ANDAYANI) VS (CLARA & TETRA)</span>
+                        <span class="schedule-court">GANDA PUTRI</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">19:00</span>
+                        <span class="schedule-teams">(INDRA NURANI & RAFISYA INDI RACHMAWATI) VS (ANITA ZULIANI & FIRDA NUR ANNISA)</span>
+                        <span class="schedule-court">GANDA PUTRI</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">19:15</span>
+                        <span class="schedule-teams">(WANANIEL & GRACE) VS (MUHAMMAD FIRDAUS & FIRDA NUR ANISA FUJIATI)</span>
+                        <span class="schedule-court">GANDA CAMPURAN</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">19:30</span>
+                        <span class="schedule-teams">(NADHIRA FAUZIA HAUNAFASYA & JAKA BRAJADENTA) VS (ARIEF DHARMAWAN & INDRA NURANI) <i style="color:#FF0000;">(Reschedule)</i></span>
+                        <span class="schedule-court">GANDA CAMPURAN</span>
+                    </div>
+					<div class="schedule-match">
+                        <span class="schedule-time">19:45</span>
+                        <span class="schedule-teams">(RAMA & MAYA) VS (TETRA & GHUVRON)</i></span>
+                        <span class="schedule-court">GANDA CAMPURAN</span>
+                    </div>
+                </div>
+                
+                <div class="schedule-day">
+                    <div class="schedule-date">🗓️ Kamis, 02 Oktober 2025 - Babak Penyisihan (Lanjutan)</div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:00</span>
+                        <span class="schedule-teams">(YANUAR RAMADANI & DENI WAHYUDI) VS (ARIEF RACHMADY & RICKY EKO WAHYUDI)</span>
+                        <span class="schedule-court">GANDA PUTRA</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:13</span>
+                        <span class="schedule-teams"> (DELLY RIZKI SAVIOLLA & SIDIK ANUGRAH) VS (MOCHAMAD FAISAL & AHMAD RISKY)</span>
+                        <span class="schedule-court">GANDA PUTRA</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:26</span>
+                        <span class="schedule-teams">(JAKA BRAJADENTA & RONI SUMANTRI) VS (FAJAR NUGRAHA & RIZKY DHERMAWAN)</span>
+                        <span class="schedule-court">GANDA PUTRA</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:39</span>
+                        <span class="schedule-teams">(MAYASYARI & VERA SUCIYATI) VS (NADIRA & ERIKA)</span>
+                        <span class="schedule-court">GANDA PUTRI</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:52</span>
+                        <span class="schedule-teams"> (GRACE MALAU & VIONTINA DEA) VS  (REVITA ARYANI & PUTRI WAHYURIANI)</span>
+                        <span class="schedule-court">GANDA PUTRI</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">19:05</span>
+                        <span class="schedule-teams">(REVITA ARYANI & ARSEN VANADI HALIM) VS (YANUAR RAMADANI & ANITA ZULIANI)</span>
+                        <span class="schedule-court">GANDA CAMPURAN</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">19:18</span>
+                        <span class="schedule-teams">(FEBRINA ANDAYANI & MUHAMMAD AFIF ABDILLAH) VS (HISTORIDA BAGASKARA & KARTIKA AMARETA)</span>
+                        <span class="schedule-court">GANDA CAMPURAN</span>
+                    </div>
+					<div class="schedule-match">
+                        <span class="schedule-time">19:31</span>
+                        <span class="schedule-teams">(AGUNG TRIYADI & YASINTHA PUTERI LARASATI) VS (DENI WAHYUDI & LIDYA MARCELINA)</i></span>
+                        <span class="schedule-court">GANDA CAMPURAN</span>
+                    </div>
+					<div class="schedule-match">
+                        <span class="schedule-time">19:44</span>
+                        <span class="schedule-teams">(NADHIRA FAUZIA HAUNAFASYA & JAKA BRAJADENTA) VS (ARIEF DHARMAWAN & INDRA NURANI)</span>
+                        <span class="schedule-court">GANDA CAMPURAN</span>
+                    </div>
+                </div>
+                
+                <div class="schedule-day">
+                    <div class="schedule-date">🗓️ Kamis, 9 Oktober 2025 - Babak Penyisihan (Lanjutan) & babak Kedua</div>
+
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:00</span>
+                        <span class="schedule-teams">(GUNTUR MASPUTRA JR & RYUKAZU ANDARA S) VS (SLAMET KURNIAWAN & HARYO PAMINTO ADJI)</span>
+                        <span class="schedule-court">GANDA PUTRA</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:13</span>
+                        <span class="schedule-teams"> (WANDANIEL & NAUFAL) VS (JUAN MARULI & GHUVRON HUSNI)</span>
+                        <span class="schedule-court">GANDA PUTRA</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:26</span>
+                        <span class="schedule-teams">(FEBIUTOYO & REZKI DWI) VS (MOCHAMAD IQSAL ALFIANSYAH & LUTHFI EKI REZA)</span>
+                        <span class="schedule-court">GANDA PUTRA</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:39</span>
+                        <span class="schedule-teams">(ANNISA APRILIA PUSPARANI & KHARISMA APRILIA LESTARI) VS  (Pemenang GPI-G vs GPI-H)</span>
+                        <span class="schedule-court">GANDA PUTRI</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:52</span>
+                        <span class="schedule-teams">(KHARISMA APRILIA LESTARI & SLAMET KURNIAWAN) VS (ANDI RUSANDI & DESIYANTI PRATIWI)</span>
+                        <span class="schedule-court">GANDA CAMPURAN</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">19:05</span>
+                        <span class="schedule-teams">(FEBRINA ANDAYANI & MUHAMMAD AFIF ABDILLAH) VS (HISTORIDA BAGASKARA & KARTIKA AMARETA)</span>
+                        <span class="schedule-court">GANDA CAMPURAN</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">19:18</span>
+                        <span class="schedule-teams">(WANANIEL & GRACE) VS (Pemenang GCA-C vs GCA-D)</span>
+                        <span class="schedule-court">GANDA CAMPURAN</span>
+                    </div>
+					<div class="schedule-match">
+                        <span class="schedule-time">19:31</span>
+                        <span class="schedule-teams">(Pemenang GCA-M vs GCA-N) VS (REIGI AHMAD FADILAH & FAUZIAH NUR AZIZAH)</i></span>
+                        <span class="schedule-court">GANDA CAMPURAN</span>
+                    </div>
+                
+                <div class="schedule-day">
+                    <div class="schedule-date">🗓️ Kamis, 16 Oktober 2025 - Babak Kedua (lanjutan) & Semifinal Ganda Putri</div>
+
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:00</span>
+                        <span class="schedule-teams">(Pemenang GPA-E vs GPA-F) VS (Pemenang GPA-G vs GPA-H)</span>
+                        <span class="schedule-court">GANDA PUTRA</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:15</span>
+                        <span class="schedule-teams"> (Pemenang GPA-I vs GPA-J) VS (Pemenang GPA-K vs GPA-L)</span>
+                        <span class="schedule-court">GANDA PUTRA</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:30</span>
+                        <span class="schedule-teams">(NADHIRA FAUZIA & FEBRINA ANDAYANI) VS (Pemenang GPI-C vs GPI-D)</span>
+                        <span class="schedule-court">GANDA PUTRI</span>
+                    </div>
+					
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:50</span>
+                        <span class="schedule-teams">(ANITA ZULIANI & FIRDA NUR ANNISA) VS (Pemenang M+)</span>
+                        <span class="schedule-court">GANDA PUTRI</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">19:10</span>
+                        <span class="schedule-teams">(Pemenang GCA-E vs GCA-F) VS (Pemenang GCA-G vs GCA-H)</span>
+                        <span class="schedule-court">GANDA CAMPURAN</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">19:25</span>
+                        <span class="schedule-teams"> (Pemenang GCA-I vs GCA-J) VS  (RAMA & MAYA)</span>
+                        <span class="schedule-court">GANDA CAMPURAN</span>
+                    </div>                
+                
+                <div class="schedule-day">
+                    <div class="schedule-date">🗓️ Kamis, 23 Oktober 2025 - Semifinal (Ganda Putra & Campuran)</div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:00</span>
+                        <span class="schedule-teams">(Pemenang Babak 2 - Match 1) VS (Pemenang Babak 2 - Match 2)</span>
+                        <span class="schedule-court">GANDA PUTRA</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:20</span>
+                        <span class="schedule-teams">(Pemenang Babak 2 - Match 3) VS (Pemenang Babak 2 - Match 4)</span>
+                        <span class="schedule-court">GANDA PUTRA</span>
+                    </div>
+                    
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:40</span>
+                        <span class="schedule-teams">(Pemenang Babak 2 - Match 1) VS (Pemenang Babak 2 - Match 2)</span>
+                        <span class="schedule-court">GANDA CAMPURAN</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">19:00</span>
+                        <span class="schedule-teams">(Pemenang Babak 2 - Match 3) VS (Pemenang Babak 2 - Match 4)</span>
+                        <span class="schedule-court">GANDA CAMPURAN</span>
+                    </div> 
+                </div>
+                
+                <div class="schedule-day">
+                    <div class="schedule-date">🗓️ Selasa, 28 Oktober 2025 - FINAL</div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:00</span>
+                        <span class="schedule-teams">(Semifinalis 1) VS (Semifinalis 2)</span>
+                        <span class="schedule-court">GANDA PUTRA (Lapangan1)</span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:30</span>
+                        <span class="schedule-teams"> (Semifinalis 1) VS (Semifinalis 2)</span>
+                        <span class="schedule-court">GANDA PUTRA (Lapangan1)</span>
+                    </div>
+					
+					<div class="schedule-match">
+                        <span class="schedule-time">18:00</span>
+                        <span class="schedule-teams">(Semifinalis 1) VS (Semifinalis 2)</span>
+                        <span class="schedule-court">GANDA PUTRI (Lapangan2) </span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">18:30</span>
+                        <span class="schedule-teams"> (Semifinalis 1) VS (Semifinalis 2)</span>
+                        <span class="schedule-court">GANDA PUTRI (Lapangan2)</span>
+                    </div>
+                    
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">19:00</span>
+                        <span class="schedule-teams">(Semifinalis 1) VS (Semifinalis 2)</span>
+                        <span class="schedule-court">GANDA CAMPURAN (Lapangan1) </span>
+                    </div>
+                    
+                    <div class="schedule-match">
+                        <span class="schedule-time">19:30</span>
+                        <span class="schedule-teams">(Semifinalis 1) VS (Semifinalis 2)</span>
+                        <span class="schedule-court">GANDA CAMPURAN (Lapangan1) </span>
+                    </div> 
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #ff6b35, #f79d3c); color: white; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                    <h4 style="margin: 0 0 10px 0;">📍 Informasi Penting:</h4>
+                    <ul style="margin: 0; padding-left: 20px;">
+						<li><strong>Lokasi:</strong> <a href="https://bit.ly/GrandSportCenterKuningan">GrandSport Center Kuningan</a></li>
+                        <li><strong>Perlengkapan:</strong> Peserta wajib mengenakan kostum olahraga</li>
+                        <li><strong>Shuttlecock & Raket:</strong> Disediakan panitia</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -675,14 +1063,17 @@
                 <li><strong>Ganda Putri (GPI):</strong> 2 pemain PUTRI</li>
                 <li><strong>Ganda Campuran (GCA):</strong> 1 pemain PUTRA + 1 pemain PUTRI</li>
             </ul>
-            <p><strong>Catatan:</strong> Setiap kategori memiliki 1 tim bye di babak Penyisihan karena jumlah peserta ganjil.</p>
+            <p><strong>Catatan:</strong> Beberapa kategori memiliki tim bye di babak awal karena jumlah peserta ganjil.</p>
             <h4>Aturan:</h4>
             <ul>
                 <li>Sistem pertandingan: Gugur</li>
-                <li>Babak kualifikasi sampai perempat final setiap game sampai 16 poin dan 21 di semifinal dan final</li>
-                <li>Setiap pertandingan akan diumumkan H-1 dan peserta wajib datang pada hari yang di tentukan (jika tidak datang peserta dinyatakan WO)</li>
-                <li>Peserta wajib hadir tepat waktu, keterlambatan >15 menit = WO</li>
+                <li>Babak penyisihan sampai perempat final: setiap game sampai 16 poin</li>
+                <li>Semifinal dan final: setiap game sampai 21 poin</li>
+                <li>Setiap pertandingan akan diingatkan H-1 pertandingan dan peserta wajib datang pada hari yang ditentukan</li>
+				<li>Untuk peserta yang berhalangan hadir karena alasan tertentu, bisa melakukan reschedule jadwal dengan persetujuan panitia dan tim lawan. Jika salah satu pihak tidak bersedia maka diangap gugur (WO)</li>
+                <li>Peserta wajib hadir tepat waktu</li>
                 <li>Menjunjung tinggi sportivitas dan menjaga keamanan pertandingan</li>
+                <li>Keputusan wasit tidak dapat diganggu gugat</li>
             </ul>
         </div>
     </div>
@@ -704,7 +1095,46 @@
             // Show selected category and activate tab
             document.getElementById(category).classList.add('active');
             document.querySelector('.tab.' + category).classList.add('active');
+            
+            // Redraw bracket lines for the new active category
+            if (category !== 'schedule') {
+                setTimeout(() => {
+                    drawBracketLines();
+                }, 200);
+            }
         }
+        
+        // Test function to verify JavaScript is working
+        console.log('Tournament bracket JavaScript loaded successfully!');
+        
+        // Add connecting lines when page loads
+        window.addEventListener('load', function() {
+            adjustBracketLines();
+        });
+        
+        // Adjust bracket lines based on actual element positions
+        function adjustBracketLines() {
+            const categories = ['mens', 'womens', 'mixed'];
+            
+            categories.forEach(category => {
+                const categoryElement = document.getElementById(category);
+                if (!categoryElement) return;
+                
+                const svg = categoryElement.querySelector('.bracket-svg');
+                const matches = categoryElement.querySelectorAll('.match');
+                
+                if (svg && matches.length > 0) {
+                    // Get the actual positions of matches and adjust SVG paths
+                    // This is a simplified version - in production, you'd calculate exact positions
+                    console.log(`Adjusting lines for ${category} category`);
+                }
+            });
+        }
+        
+        // Responsive bracket lines
+        window.addEventListener('resize', function() {
+            adjustBracketLines();
+        });
     </script>
 </body>
 </html>
